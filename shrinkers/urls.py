@@ -15,6 +15,7 @@ Including another URLconf
 """
 from shortener.urls.views import url_redirect
 from shrinkers.settings import DEBUG
+from shortener.urls.urls import router as url_router
 
 # if DEBUG:
 #     import debug_toolbar
@@ -26,6 +27,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("shortener.index.urls")),
     path("urls/", include("shortener.urls.urls")),
+    path("api/", include(url_router.urls)),
     path("<str:prefix>/<str:url>", url_redirect),
 ]
 

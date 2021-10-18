@@ -43,7 +43,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'shortener',
     "django_user_agents",
+    'rest_framework',
 ]
+
+# RestfulFrameWork
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}
 
 # if DEBUG:
 #     INSTALLED_APPS += [
