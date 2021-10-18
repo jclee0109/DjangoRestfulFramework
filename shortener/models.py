@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
+from shortener.model_utlis import dict_slice, dict_filter
 
 
 class TimeStampedModel(models.Model):
@@ -110,8 +111,8 @@ class Statistic(TimeStampedModel):
         self.web_browser = request.user_agent.browser.family
         self.device = self.ApproachDevice.MOBILE if request.user_agent.is_mobile else self.ApproachDevice.TABLET if request.user_agent.is_tablet else self.ApproachDevice.PC
 
-        t=TrackingParams.get_tracking_params(url.id)
-        self.custom_params = params
+        t = TrackingParams.get_tracking_params(url.id)
+        self.custom_params = dict_slice(dict_filter(params, t), 5)
         self.device_os = request.user_agent.os.family
         url.clicked()
         self.save()
@@ -125,4 +126,4 @@ class TrackingParams(TimeStampedModel):
     def get_tracking_params(cls, shortened_url_id: int):
         #["email_id", "ref_by"] -> flat = True
         #[{"params" : "email_id"}, {"params":"ref_by"}] -> flat = False
-        return cls.object.filter(shortend_url_id=shortened_url_id).values_list("params", flat=True)
+        return TrackingParams.objects.filter(shortened_url_id=shortened_url_id).values_list("params", flat=True)
