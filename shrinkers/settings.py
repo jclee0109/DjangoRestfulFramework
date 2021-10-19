@@ -62,7 +62,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]  # Django Debug Toolbar
 
-LOGIN_URL = "/login"
+LOGIN_URL = ""
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
