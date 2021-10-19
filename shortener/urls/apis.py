@@ -1,5 +1,7 @@
 from django.http import Http404
 from rest_framework import viewsets, permissions, status
+from rest_framework.decorators import renderer_classes
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from shortener.models import ShortenedUrls
@@ -37,6 +39,7 @@ class UrlViewSet(viewsets.ModelViewSet):
         #PATCH METHOD
         pass
 
+    @renderer_classes([JSONRenderer])
     def destroy(self, request, pk=None):
         #DELETE METHOD
         queryset = self.get_queryset().filter(pk=pk, creator_id=request.user.id)

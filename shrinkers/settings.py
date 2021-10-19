@@ -112,7 +112,7 @@ DATABASES = {
         "PASSWORD": "wnck1203!!",
         "HOST": "34.64.214.130",
         "PORT": 3306,
-        "OPTIONS":{
+        "OPTIONS": {
             "autocommit": True,
             "charset": "utf8mb4"
         }

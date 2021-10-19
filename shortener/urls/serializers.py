@@ -26,7 +26,7 @@ class UrlListSerializer(serializers.ModelSerializer):
 
 
 class UrlCreateSerializer(serializers.Serializer):
-    nick_name = serializers.CharField(max_length=50)
+    nick_name = serializers.CharField(max_length=100)
     target_url = serializers.CharField(max_length=2000)
     category = serializers.IntegerField(required=False)
 
@@ -35,6 +35,27 @@ class UrlCreateSerializer(serializers.Serializer):
         instance.creator_id = request.user.id
         instance.category = data.get("category", None)
         instance.target_url = data.get("target_url").strip()
+        instance.nick_name = data.get("nick_name")
+        if commit:
+            try:
+                instance.save()
+            except Exception as e:
+                print(e)
+            else:
+                url_count_changer(request, True)
+        return instance
+
+class UrlCreateSerializer(serializers.Serializer):
+    nick_name = serializers.CharField(max_length=100)
+    target_url = serializers.CharField(max_length=2000)
+    category = serializers.IntegerField(required=False)
+
+    def create(self, request, data, commit=True):
+        instance = ShortenedUrls()
+        instance.creator_id = request.user.id
+        instance.category = data.get("category", None)
+        instance.target_url = data.get("target_url").strip()
+        instance.nick_name = data.get("nick_name")
         if commit:
             try:
                 instance.save()
