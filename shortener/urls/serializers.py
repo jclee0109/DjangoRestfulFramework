@@ -45,6 +45,7 @@ class UrlCreateSerializer(serializers.Serializer):
                 url_count_changer(request, True)
         return instance
 
+
 class UrlCreateSerializer(serializers.Serializer):
     nick_name = serializers.CharField(max_length=100)
     target_url = serializers.CharField(max_length=2000)

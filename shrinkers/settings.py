@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'shortener',
     "django_user_agents",
+    'drf_yasg',
     'rest_framework',
 ]
 
@@ -62,7 +63,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]  # Django Debug Toolbar
 
-LOGIN_URL = ""
+LOGIN_URL = "/"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
